@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device=width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>Heart Disease Prediction</title>
+</head>
+
+<style>
+	.content-table{
+		position: relative;
+		align-items: center;
+		border-collapse: collapse;
+		margin: 25px 0;
+		font-size: 0.95em;
+		min-width: 400px;
+		border-radius: 5px 5px 0 0;
+		overflow: hidden;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	}
+	.content-table thead tr{
+		background-color: #4070f4;
+		color: #ffffff;
+		text-align: left;
+		font-weight: bold;
+	}
+	.content-table th,
+	.content-table td{
+		padding: 12px 15px;
+	}
+	.content-table tbody tr{
+		border-bottom: 1px solid #dddddd;
+	}
+	.content-table tbobt tr:nth-last-of-type(even){
+		background-color: #f3f3f3;
+	}
+	.content-table tbody tr:last-of-type{
+		border-bottom: 2px solid #4070f4;
+	}
+	.content-table tbody tr.active-row{
+		font-weight: bold;
+		color: #4070f4;
+	}
+</style>
+
+<body>
+    <div class="container">
+        <header>Heart Disease Prediction</header>
+        <form action="{{url_for('predict')}}" method="POST">
+            <div class="form_first">
+                <div class="details_personal">
+                    <span class="title">Prediction based on models</span>
+                </div>
+				<div class="input_fields">
+					<div class="model_table">
+						<table class="content-table">
+							<thead>
+								<tr>
+									<th>Model</th>
+									<th>Are you at risk of heart disease?</th>
+									<th>Model Accuracy</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Logistic Regression</td>
+									<td>{% if lr_prediction==1 %}
+										Yes
+										{% elif lr_prediction==0 %}
+										No
+										{% endif %}
+									</td>
+									<td>81.32%</td>
+								</tr>
+								<tr class="active-row">
+									<td>Naive Bayes</td>
+									<td>
+										{% if nb_prediction==1 %}
+										Yes
+										{% elif nb_prediction==0 %}
+										No
+										{% endif %}
+									</td>
+									<td>82.42%</td>
+								</tr>
+								<tr>
+									<td>K-Nearest Neighbors</td>
+									<td>
+										{% if knn_prediction==1 %}
+										Yes
+										{% elif knn_prediction==0 %}
+										No
+										{% endif %}
+									</td>
+									<td>59.34%</td>
+								</tr>
+								<tr class="active-row">
+									<td>Decision Tree</td>
+									<td>
+										{% if dt_prediction==1 %}
+										Yes
+										{% elif dt_prediction==0 %}
+										No
+										{% endif %}
+									</td>
+									<td>84.00%</td>
+								</tr>
+								<tr>
+									<td>Support Vector Machine</td>
+									<td>
+										{% if svm_prediction==1 %}
+										Yes
+										{% elif svm_prediction==0 %}
+										No
+										{% endif %}
+									</td>
+									<td>82.42%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+   
